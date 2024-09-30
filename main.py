@@ -1,3 +1,5 @@
+import os
+import csv
 from bs4 import BeautifulSoup
 
 def get_pairs(paragraphs):
@@ -21,6 +23,17 @@ def get_pairs(paragraphs):
 
     return pairs
 
+def create_csv(filename, pairs):
+
+    name = filename.split('/')[-1].split('.')[0]
+    path = os.path.join('./dialogue-pairs', name + '.csv')
+
+    with open(path, mode='w', newline='') as file:
+        writer = csv.writer(file)
+
+        for key, value in pairs.items():
+            writer.writerow([key, value])
+
 
 def main():
     # define target novel
@@ -37,5 +50,8 @@ def main():
 
     for key in pairs:
         print(key, pairs[key])
+
+    #create new csv
+    create_csv(filename, pairs)
 
 main()
