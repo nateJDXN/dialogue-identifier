@@ -10,6 +10,7 @@ def get_pairs(paragraphs):
     for index, p in enumerate(paragraphs):
         # key dialogue
         dialogue1 = p.get_text()
+        print(dialogue1)
 
         # check for out of boundsd
         if index + 1 < len(paragraphs):
@@ -17,8 +18,9 @@ def get_pairs(paragraphs):
         else:
             continue
         
-        # checks for quotatios and max length
-        if dialogue1.count("\"") == 2 and len(dialogue1) < 300 and dialogue2.count("\"") == 2 and len(dialogue2) < 300:
+        # checks for quotations and max length
+        #print("we are checking")
+        if dialogue1.count("\"") == 2 and dialogue2.count("\"") == 2:
             pairs.update({dialogue1 : dialogue2})
 
     return pairs
@@ -37,7 +39,7 @@ def create_csv(filename, pairs):
 
 def main():
     # define target novel
-    filename = "sources/Victoria _ Project Gutenberg.html";
+    filename = "sources/Cosmos_Colliding.html";
 
     with open(filename, 'r') as file:
         content = file.read()
