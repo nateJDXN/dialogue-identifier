@@ -25,12 +25,16 @@ def get_pairs(paragraphs):
 
     return pairs
 
-def create_csv(filename, pairs):
+def create_csv(pairs):
 
-    name = filename.split('/')[-1].split('.')[0]
-    path = os.path.join('./dialogue-pairs', name + '.csv')
+    # for creating individual csv's
+    # name = filename.split('/')[-1].split('.')[0]
+    # path = os.path.join('./dialogue-pairs', name + '.csv')
 
-    with open(path, mode='w', newline='') as file:
+    path = "dialogue-pairs/dialogue-pairs.csv"
+
+    # open in append mode so previous lines aren't overwritten
+    with open(path, mode='a', newline='') as file:
         writer = csv.writer(file)
 
         for key, value in pairs.items():
@@ -39,7 +43,7 @@ def create_csv(filename, pairs):
 
 def main():
     # define target novel
-    filename = "sources/Cosmos_Colliding.html";
+    filename = "sources/In_the_Melancholy.html";
 
     with open(filename, 'r') as file:
         content = file.read()
@@ -54,6 +58,6 @@ def main():
         print(key, pairs[key])
 
     #create new csv
-    create_csv(filename, pairs)
+    create_csv(pairs)
 
 main()
